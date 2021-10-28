@@ -1,0 +1,5 @@
+# staging.args
+-v URL:https://console.qa.twake.app/
+-v UserEmail:uanenglish01@gmail.com
+-v UserPassWord:asdASD123!@#
+-v PC_HOSTNAME:linagora

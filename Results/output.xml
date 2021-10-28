@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0 (Python 3.8.10 on linux)" generated="20211027 16:14:48.571" rpa="false" schemaversion="2">
+<suite id="s1" name="Currentupload" source="/home/tuanpv/TRAINING AUTOMATION/Automation_TuanPV/robot-framework-twakeconsole/Tests/linshareweb/currentupload.robot">
+<test id="s1-t1" name="TC_03_Verify User Can Pause Uploading File In List Of Uploading Files">
+<kw name="Start Web Test" library="common" type="SETUP">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>about:blank</arg>
+<arg>${BROWSER}</arg>
+<doc>Opens a new browser instance to the given ``url``.</doc>
+<msg timestamp="20211027 16:14:48.712" level="INFO">Opening browser 'chrome' to base url 'about:blank'.</msg>
+<status status="PASS" starttime="20211027 16:14:48.711" endtime="20211027 16:14:50.090"/>
+</kw>
+<kw name="Set Window Size" library="SeleniumLibrary">
+<arg>1920</arg>
+<arg>1080</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" starttime="20211027 16:14:50.090" endtime="20211027 16:14:50.199"/>
+</kw>
+<kw name="Set Selenium Timeout" library="SeleniumLibrary">
+<arg>${WAIT_TIMEOUT_SELENIUM}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" starttime="20211027 16:14:50.200" endtime="20211027 16:14:50.201"/>
+</kw>
+<status status="PASS" starttime="20211027 16:14:48.711" endtime="20211027 16:14:50.201"/>
+</kw>
+<kw name="Prepare Files To Upload" library="common_linshare">
+<var>${file_to_upload}</var>
+<arg>1</arg>
+<arg>chromedriver.zip</arg>
+<kw name="Get Current Date" library="DateTime">
+<var>${CurrentDate}</var>
+<arg>result_format=%a %B %d %H%M%S UTC %Y</arg>
+<doc>Returns current local or UTC time with an optional increment.</doc>
+<msg timestamp="20211027 16:14:50.203" level="INFO">${CurrentDate} = Wed October 27 161450 UTC 2021</msg>
+<status status="PASS" starttime="20211027 16:14:50.202" endtime="20211027 16:14:50.203"/>
+</kw>
+<kw name="Evaluate End Range Of File" library="common_linshare">
+<var>${range_of_file}</var>
+<arg>${number_of_file}</arg>
+<kw name="Evaluate" library="BuiltIn">
+<var>${range_of_file}</var>
+<arg>${number_of_file} + 1</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20211027 16:14:50.205" level="INFO">${range_of_file} = 2</msg>
+<status status="PASS" starttime="20211027 16:14:50.204" endtime="20211027 16:14:50.205"/>
+</kw>
+<msg timestamp="20211027 16:14:50.205" level="INFO">${range_of_file} = 2</msg>
+<status status="PASS" starttime="20211027 16:14:50.203" endtime="20211027 16:14:50.205"/>
+</kw>
+<kw name="Create List" library="BuiltIn">
+<var>${file_to_upload}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20211027 16:14:50.206" level="INFO">${file_to_upload} = []</msg>
+<status status="PASS" starttime="20211027 16:14:50.206" endtime="20211027 16:14:50.206"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>1</value>
+<value>${range_of_file}</value>
+<iter>
+<var name="${i}">1</var>
+<kw name="Append To List" library="Collections">
+<arg>${file_to_upload}</arg>
+<arg>${file_name}_${CurrentDate}_${i}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20211027 16:14:50.207" endtime="20211027 16:14:50.207"/>
+</kw>
+<status status="PASS" starttime="20211027 16:14:50.206" endtime="20211027 16:14:50.207"/>
+</iter>
+<status status="PASS" starttime="20211027 16:14:50.206" endtime="20211027 16:14:50.207"/>
+</for>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>0</value>
+<value>${number_of_file}</value>
+<iter>
+<var name="${i}">0</var>
+<kw name="Copy File" library="OperatingSystem">
+<arg>${EXECDIR}/Data/${file_name}</arg>
+<arg>${EXECDIR}/Data/${file_to_upload}[${i}]</arg>
+<doc>Copies the source file into the destination.</doc>
+<msg timestamp="20211027 16:14:50.215" level="INFO" html="true">Copied file from '&lt;a href="file:///home/tuanpv/TRAINING AUTOMATION/Automation_TuanPV/robot-framework-twakeconsole/Data/chromedriver.zip"&gt;/home/tuanpv/TRAINING AUTOMATION/Automation_TuanPV/robot-framework-twakeconsole/Data/chromedriver.zip&lt;/a&gt;' to '&lt;a href="file:///home/tuanpv/TRAINING AUTOMATION/Automation_TuanPV/robot-framework-twakeconsole/Data/chromedriver.zip_Wed October 27 161450 UTC 2021_1"&gt;/home/tuanpv/TRAINING AUTOMATION/Automation_TuanPV/robot-framework-twakeconsole/Data/chromedriver.zip_Wed October 27 161450 UTC 2021_1&lt;/a&gt;'.</msg>
+<status status="PASS" starttime="20211027 16:14:50.208" endtime="20211027 16:14:50.215"/>
+</kw>
+<status status="PASS" starttime="20211027 16:14:50.207" endtime="20211027 16:14:50.215"/>
+</iter>
+<status status="PASS" starttime="20211027 16:14:50.207" endtime="20211027 16:14:50.215"/>
+</for>
+<msg timestamp="20211027 16:14:50.216" level="INFO">${file_to_upload} = ['chromedriver.zip_Wed October 27 161450 UTC 2021_1']</msg>
+<status status="PASS" starttime="20211027 16:14:50.202" endtime="20211027 16:14:50.216"/>
+</kw>
+<kw name="Open Linshare" library="common_linshare">
+<kw name="Login to Linshare" library="loginpage">
+<arg>${UserEmail}</arg>
+<arg>${UserPassword}</arg>
+<kw name="Navigate To" library="loginpage">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${url}</arg>
+<doc>Navigates the active browser instance to the provided ``url``.</doc>
+<msg timestamp="20211027 16:14:50.219" level="INFO">Opening url 'https://user.linshare-4-3-on-commit.integration-linshare.org/'</msg>
+<status status="PASS" starttime="20211027 16:14:50.218" endtime="20211027 16:18:08.704"/>
+</kw>
+<status status="PASS" starttime="20211027 16:14:50.217" endtime="20211027 16:18:08.705"/>
+</kw>
+<kw name="Login To System" library="loginpage">
+<arg>${UserEmail}</arg>
+<arg>${UserPassword}</arg>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${url}</arg>
+<doc>Navigates the active browser instance to the provided ``url``.</doc>
+<msg timestamp="20211027 16:18:08.705" level="INFO">Opening url 'https://user.linshare-4-3-on-commit.integration-linshare.org/'</msg>
+<status status="PASS" starttime="20211027 16:18:08.705" endtime="20211027 16:18:12.203"/>
+</kw>
+<kw name="Enter Input Data And Login" library="loginpage">
+<arg>${username}</arg>
+<arg>${password}</arg>
+<kw name="Enter To Email TextBox" library="loginpage">
+<arg>${Email}</arg>
+<kw name="Input Into TextBox" library="common">
+<arg>${INPUT_EMAIL_TEXTBOX}</arg>
+<arg>${text}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211027 16:18:12.205" endtime="20211027 16:18:14.740"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets focus to element identified by ``locator``.</doc>
+<status status="PASS" starttime="20211027 16:18:14.740" endtime="20211027 16:18:14.775"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<msg timestamp="20211027 16:18:14.776" level="INFO">Typing text 'walker.mccallister@linshare.org' into text field '//input[@id='inputEmail']'.</msg>
+<status status="PASS" starttime="20211027 16:18:14.775" endtime="20211027 16:18:14.933"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:12.204" endtime="20211027 16:18:14.933"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:12.204" endtime="20211027 16:18:14.933"/>
+</kw>
+<kw name="Enter To Password Textbox" library="loginpage">
+<arg>${Password}</arg>
+<kw name="Input Into TextBox" library="common">
+<arg>${INPUT_PASSWORD_TEXTBOX}</arg>
+<arg>${text}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211027 16:18:14.934" endtime="20211027 16:18:14.959"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets focus to element identified by ``locator``.</doc>
+<status status="PASS" starttime="20211027 16:18:14.959" endtime="20211027 16:18:14.977"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<msg timestamp="20211027 16:18:14.978" level="INFO">Typing text 'secret' into text field '//input[@id='inputPassword']'.</msg>
+<status status="PASS" starttime="20211027 16:18:14.978" endtime="20211027 16:18:15.048"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:14.934" endtime="20211027 16:18:15.048"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:14.933" endtime="20211027 16:18:15.049"/>
+</kw>
+<kw name="Click To Login Button" library="loginpage">
+<kw name="Click On Button" library="common">
+<arg>${SIGN_IN_BUTTON}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211027 16:18:15.050" endtime="20211027 16:18:15.070"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Clicks button identified by ``locator``.</doc>
+<msg timestamp="20211027 16:18:15.071" level="INFO">Clicking button '//button[text()='Log in']'.</msg>
+<status status="PASS" starttime="20211027 16:18:15.071" endtime="20211027 16:18:15.138"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:15.049" endtime="20211027 16:18:15.138"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:15.049" endtime="20211027 16:18:15.138"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:12.203" endtime="20211027 16:18:15.138"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:08.705" endtime="20211027 16:18:15.139"/>
+</kw>
+<status status="PASS" starttime="20211027 16:14:50.216" endtime="20211027 16:18:15.139"/>
+</kw>
+<kw name="Verify LinShare Loading Successful" library="common_linshare">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Welcome to LinShare</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until ``text`` appears on current page.</doc>
+<status status="PASS" starttime="20211027 16:18:15.139" endtime="20211027 16:18:36.223"/>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<arg>Welcome to LinShare</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<msg timestamp="20211027 16:18:36.275" level="INFO">Current page contains text 'Welcome to LinShare'.</msg>
+<status status="PASS" starttime="20211027 16:18:36.223" endtime="20211027 16:18:36.275"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:15.139" endtime="20211027 16:18:36.276"/>
+</kw>
+<status status="PASS" starttime="20211027 16:14:50.216" endtime="20211027 16:18:36.276"/>
+</kw>
+<kw name="Go to items In Left Menu" library="common_linshare">
+<arg>${name_item}</arg>
+<arg>${title_in_page}</arg>
+<kw name="Click On Element" library="common">
+<arg>//div[@class='sidebar-inner ng-scope']//span[string()='${name_item}']</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211027 16:18:36.277" endtime="20211027 16:18:36.296"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click element identified by ``locator``.</doc>
+<msg timestamp="20211027 16:18:36.297" level="INFO">Clicking element '//div[@class='sidebar-inner ng-scope']//span[string()='Current uploads']'.</msg>
+<status status="PASS" starttime="20211027 16:18:36.296" endtime="20211027 16:18:36.486"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:36.276" endtime="20211027 16:18:36.486"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>${title_in_page}</arg>
+<doc>Waits until ``text`` appears on current page.</doc>
+<status status="PASS" starttime="20211027 16:18:36.487" endtime="20211027 16:18:36.559"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:36.276" endtime="20211027 16:18:36.559"/>
+</kw>
+<kw name="Upload Multiple Files" library="currentuploadpage">
+<arg>${file_to_upload}</arg>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${CURRENT_UPLOAD_FILE_UPLOAD_ELE}</arg>
+<doc>Waits until element ``locator`` appears on current page.</doc>
+<status status="PASS" starttime="20211027 16:18:36.560" endtime="20211027 16:18:36.573"/>
+</kw>
+<kw name="Set Element Visible" library="common">
+<arg>${CURRENT_UPLOAD_FILE_ADD_FILE_ICON}</arg>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>var ele = document.querySelector("${element}");</arg>
+<arg>ele.style.visibility = "visible";</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20211027 16:18:36.575" level="INFO">Executing JavaScript:
+var ele = document.querySelector("div.menu-popover-ctn.hidden-xs.waves-effect.clickable input");ele.style.visibility = "visible";
+Without any arguments.</msg>
+<status status="PASS" starttime="20211027 16:18:36.574" endtime="20211027 16:18:36.580"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:36.574" endtime="20211027 16:18:36.580"/>
+</kw>
+<kw name="Get Length" library="BuiltIn">
+<var>${length}</var>
+<arg>${files_name}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20211027 16:18:36.580" level="INFO">Length is 1</msg>
+<msg timestamp="20211027 16:18:36.581" level="INFO">${length} = 1</msg>
+<status status="PASS" starttime="20211027 16:18:36.580" endtime="20211027 16:18:36.581"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${input_text}</var>
+<arg>${EXECDIR}/Data/${files_name}[0]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20211027 16:18:36.581" level="INFO">${input_text} = /home/tuanpv/TRAINING AUTOMATION/Automation_TuanPV/robot-framework-twakeconsole/Data/chromedriver.zip_Wed October 27 161450 UTC 2021_1</msg>
+<status status="PASS" starttime="20211027 16:18:36.581" endtime="20211027 16:18:36.581"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>1</value>
+<value>${length}</value>
+<status status="PASS" starttime="20211027 16:18:36.581" endtime="20211027 16:18:36.581"/>
+</for>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${CURRENT_UPLOAD_FILE_UPLOAD_ELE}</arg>
+<arg>${input_text}</arg>
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<msg timestamp="20211027 16:18:36.582" level="INFO">Typing text '/home/tuanpv/TRAINING AUTOMATION/Automation_TuanPV/robot-framework-twakeconsole/Data/chromedriver.zip_Wed October 27 161450 UTC 2021_1' into text field '//div[@class='menu-popover-ctn hidden-xs waves-effect clickable']//input[@type="file"]'.</msg>
+<status status="PASS" starttime="20211027 16:18:36.581" endtime="20211027 16:18:36.715"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:36.559" endtime="20211027 16:18:36.716"/>
+</kw>
+<kw name="Verify Uploaded File Is Listed In The Current Upload" library="currentuploadpage">
+<arg>${file_to_upload}</arg>
+<kw name="Get Length" library="BuiltIn">
+<var>${length}</var>
+<arg>${files_name}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20211027 16:18:36.717" level="INFO">Length is 1</msg>
+<msg timestamp="20211027 16:18:36.717" level="INFO">${length} = 1</msg>
+<status status="PASS" starttime="20211027 16:18:36.717" endtime="20211027 16:18:36.717"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>0</value>
+<value>${length}</value>
+<iter>
+<var name="${i}">0</var>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>${files_name}[${i}]</arg>
+<doc>Waits until ``text`` appears on current page.</doc>
+<status status="PASS" starttime="20211027 16:18:36.717" endtime="20211027 16:18:36.802"/>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<arg>${files_name}[${i}]</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<msg timestamp="20211027 16:18:36.864" level="INFO">Current page contains text 'chromedriver.zip_Wed October 27 161450 UTC 2021_1'.</msg>
+<status status="PASS" starttime="20211027 16:18:36.803" endtime="20211027 16:18:36.864"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:36.717" endtime="20211027 16:18:36.864"/>
+</iter>
+<status status="PASS" starttime="20211027 16:18:36.717" endtime="20211027 16:18:36.864"/>
+</for>
+<status status="PASS" starttime="20211027 16:18:36.716" endtime="20211027 16:18:36.865"/>
+</kw>
+<kw name="Verify the File Was Uploaded Successfully" library="currentuploadpage">
+<arg>${file_to_upload}</arg>
+<kw name="Get Length" library="BuiltIn">
+<var>${length}</var>
+<arg>${files_name}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<msg timestamp="20211027 16:18:36.867" level="INFO">Length is 1</msg>
+<msg timestamp="20211027 16:18:36.867" level="INFO">${length} = 1</msg>
+<status status="PASS" starttime="20211027 16:18:36.866" endtime="20211027 16:18:36.867"/>
+</kw>
+<for flavor="IN RANGE">
+<var>${i}</var>
+<value>0</value>
+<value>${length}</value>
+<iter>
+<var name="${i}">0</var>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>//div[text()='${files_name}[${i}]']//parent::div[@class='data-list-ctn']/small[text()='done']</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211027 16:18:36.867" endtime="20211027 16:18:53.474"/>
+</kw>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>//div[text()='${files_name}[${i}]']//parent::div[@class='data-list-ctn']/small[text()='done']</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20211027 16:18:53.528" level="INFO">Element '//div[text()='chromedriver.zip_Wed October 27 161450 UTC 2021_1']//parent::div[@class='data-list-ctn']/small[text()='done']' is displayed.</msg>
+<status status="PASS" starttime="20211027 16:18:53.474" endtime="20211027 16:18:53.528"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:36.867" endtime="20211027 16:18:53.528"/>
+</iter>
+<status status="PASS" starttime="20211027 16:18:36.867" endtime="20211027 16:18:53.528"/>
+</for>
+<status status="PASS" starttime="20211027 16:18:36.865" endtime="20211027 16:18:53.529"/>
+</kw>
+<kw name="Linshare TearDown" library="common_linshare" type="TEARDOWN">
+<arg>${file_to_upload}</arg>
+<kw name="Linshare Logout" library="common_linshare">
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LINSHARE_USER_PROFILE_AVATA}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211027 16:18:53.533" endtime="20211027 16:18:53.576"/>
+</kw>
+<kw name="Click On Element" library="common">
+<arg>${LINSHARE_USER_PROFILE_AVATA}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211027 16:18:53.577" endtime="20211027 16:18:53.594"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click element identified by ``locator``.</doc>
+<msg timestamp="20211027 16:18:53.594" level="INFO">Clicking element '//i[@class='tm-icon ls-my-profile']'.</msg>
+<status status="PASS" starttime="20211027 16:18:53.594" endtime="20211027 16:18:53.650"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:53.576" endtime="20211027 16:18:53.651"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LINSHARE_USER_TOGGLE}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211027 16:18:53.651" endtime="20211027 16:18:53.673"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${LINSHARE_USER_MENU_LOG_OUT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211027 16:18:53.673" endtime="20211027 16:18:53.696"/>
+</kw>
+<kw name="Click On Element" library="common">
+<arg>${LINSHARE_USER_MENU_LOG_OUT}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20211027 16:18:53.696" endtime="20211027 16:18:53.712"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click element identified by ``locator``.</doc>
+<msg timestamp="20211027 16:18:53.713" level="INFO">Clicking element '//ul[contains(@class,'dropdown-menu')]//span[text()='Logout']'.</msg>
+<status status="PASS" starttime="20211027 16:18:53.712" endtime="20211027 16:18:53.786"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:53.696" endtime="20211027 16:18:53.786"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${alert_status}</var>
+<arg>Alert Should Be Present</arg>
+<arg>action=LEAVE</arg>
+<arg>timeout=5</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="Alert Should Be Present" library="SeleniumLibrary">
+<arg>action=LEAVE</arg>
+<arg>timeout=5</arg>
+<doc>Verifies that an alert is present and, by default, accepts it.</doc>
+<status status="PASS" starttime="20211027 16:18:53.787" endtime="20211027 16:18:54.303"/>
+</kw>
+<msg timestamp="20211027 16:18:54.303" level="INFO">${alert_status} = ('PASS', None)</msg>
+<status status="PASS" starttime="20211027 16:18:53.786" endtime="20211027 16:18:54.303"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>${alert_status} == ('PASS', None)</arg>
+<arg>Handle Alert</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Handle Alert" library="SeleniumLibrary">
+<doc>Handles the current alert and returns its message.</doc>
+<status status="PASS" starttime="20211027 16:18:54.304" endtime="20211027 16:18:54.318"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:54.304" endtime="20211027 16:18:54.318"/>
+</kw>
+<kw name="Wait Until Page Does Not Contain Element" library="SeleniumLibrary">
+<arg>${LINSHARE_USER_PROFILE_AVATA}</arg>
+<doc>Waits until element ``locator`` disappears from current page.</doc>
+<status status="PASS" starttime="20211027 16:18:54.319" endtime="20211027 16:18:54.682"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20211027 16:18:54.682" endtime="20211027 16:18:54.762"/>
+</kw>
+<status status="PASS" starttime="20211027 16:18:53.532" endtime="20211027 16:18:54.762"/>
+</kw>
+<kw name="Open Linshare" library="common_linshare">
+<kw name="Login to Linshare" library="loginpage">
+<arg>${UserEmail}</arg>
+<arg>${UserPassword}</arg>
+<kw name="Navigate To" library="loginpage">
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${url}</arg>
+<doc>Navigates the active browser instance to the provided ``url``.</doc>
+<msg timestamp="20211027 16:18:54.764" level="INFO">Opening url 'https://user.linshare-4-3-on-commit.integration-linshare.org/'</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.764" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.764" endtime="20211027 16:18:54.764"/>
+</kw>
+<msg timestamp="20211027 16:18:54.765" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.764" endtime="20211027 16:18:54.765"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.763" endtime="20211027 16:18:54.765"/>
+</kw>
+<kw name="Login To System" library="loginpage">
+<arg>${UserEmail}</arg>
+<arg>${UserPassword}</arg>
+<kw name="Go To" library="SeleniumLibrary">
+<arg>${url}</arg>
+<doc>Navigates the active browser instance to the provided ``url``.</doc>
+<msg timestamp="20211027 16:18:54.766" level="INFO">Opening url 'https://user.linshare-4-3-on-commit.integration-linshare.org/'</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.766" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.766" endtime="20211027 16:18:54.767"/>
+</kw>
+<msg timestamp="20211027 16:18:54.767" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.766" endtime="20211027 16:18:54.767"/>
+</kw>
+<kw name="Enter Input Data And Login" library="loginpage">
+<arg>${username}</arg>
+<arg>${password}</arg>
+<kw name="Enter To Email TextBox" library="loginpage">
+<arg>${Email}</arg>
+<kw name="Input Into TextBox" library="common">
+<arg>${INPUT_EMAIL_TEXTBOX}</arg>
+<arg>${text}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.770" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.770" endtime="20211027 16:18:54.770"/>
+</kw>
+<msg timestamp="20211027 16:18:54.771" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.770" endtime="20211027 16:18:54.771"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets focus to element identified by ``locator``.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.772" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.772" endtime="20211027 16:18:54.772"/>
+</kw>
+<msg timestamp="20211027 16:18:54.773" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.772" endtime="20211027 16:18:54.773"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<msg timestamp="20211027 16:18:54.773" level="INFO">Typing text 'walker.mccallister@linshare.org' into text field '//input[@id='inputEmail']'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.774" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.773" endtime="20211027 16:18:54.774"/>
+</kw>
+<msg timestamp="20211027 16:18:54.774" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.773" endtime="20211027 16:18:54.774"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.769" endtime="20211027 16:18:54.775"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.768" endtime="20211027 16:18:54.775"/>
+</kw>
+<kw name="Enter To Password Textbox" library="loginpage">
+<arg>${Password}</arg>
+<kw name="Input Into TextBox" library="common">
+<arg>${INPUT_PASSWORD_TEXTBOX}</arg>
+<arg>${text}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.777" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.777" endtime="20211027 16:18:54.777"/>
+</kw>
+<msg timestamp="20211027 16:18:54.777" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.776" endtime="20211027 16:18:54.777"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets focus to element identified by ``locator``.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.778" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.778" endtime="20211027 16:18:54.778"/>
+</kw>
+<msg timestamp="20211027 16:18:54.778" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.778" endtime="20211027 16:18:54.778"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<msg timestamp="20211027 16:18:54.779" level="INFO">Typing text 'secret' into text field '//input[@id='inputPassword']'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.779" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.779" endtime="20211027 16:18:54.779"/>
+</kw>
+<msg timestamp="20211027 16:18:54.780" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.779" endtime="20211027 16:18:54.780"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.775" endtime="20211027 16:18:54.780"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.775" endtime="20211027 16:18:54.780"/>
+</kw>
+<kw name="Click To Login Button" library="loginpage">
+<kw name="Click On Button" library="common">
+<arg>${SIGN_IN_BUTTON}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.781" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.781" endtime="20211027 16:18:54.781"/>
+</kw>
+<msg timestamp="20211027 16:18:54.782" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.781" endtime="20211027 16:18:54.782"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Clicks button identified by ``locator``.</doc>
+<msg timestamp="20211027 16:18:54.782" level="INFO">Clicking button '//button[text()='Log in']'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.782" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.782" endtime="20211027 16:18:54.782"/>
+</kw>
+<msg timestamp="20211027 16:18:54.783" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.782" endtime="20211027 16:18:54.783"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.780" endtime="20211027 16:18:54.783"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.780" endtime="20211027 16:18:54.783"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.767" endtime="20211027 16:18:54.783"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.766" endtime="20211027 16:18:54.783"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.763" endtime="20211027 16:18:54.784"/>
+</kw>
+<kw name="Verify LinShare Loading Successful" library="common_linshare">
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>Welcome to LinShare</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until ``text`` appears on current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.785" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.784" endtime="20211027 16:18:54.785"/>
+</kw>
+<msg timestamp="20211027 16:18:54.785" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.784" endtime="20211027 16:18:54.785"/>
+</kw>
+<kw name="Page Should Contain" library="SeleniumLibrary">
+<arg>Welcome to LinShare</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.786" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.786" endtime="20211027 16:18:54.786"/>
+</kw>
+<msg timestamp="20211027 16:18:54.786" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.785" endtime="20211027 16:18:54.786"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.784" endtime="20211027 16:18:54.787"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.762" endtime="20211027 16:18:54.787"/>
+</kw>
+<kw name="Go to items In Left Menu" library="common_linshare">
+<arg>${item_name}</arg>
+<arg>${title_name}</arg>
+<kw name="Click On Element" library="common">
+<arg>//div[@class='sidebar-inner ng-scope']//span[string()='${name_item}']</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.790" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.790" endtime="20211027 16:18:54.790"/>
+</kw>
+<msg timestamp="20211027 16:18:54.790" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.789" endtime="20211027 16:18:54.790"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click element identified by ``locator``.</doc>
+<msg timestamp="20211027 16:18:54.791" level="INFO">Clicking element '//div[@class='sidebar-inner ng-scope']//span[string()='My space']'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.791" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.791" endtime="20211027 16:18:54.791"/>
+</kw>
+<msg timestamp="20211027 16:18:54.792" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.791" endtime="20211027 16:18:54.792"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.788" endtime="20211027 16:18:54.792"/>
+</kw>
+<kw name="Wait Until Page Contains" library="SeleniumLibrary">
+<arg>${title_in_page}</arg>
+<doc>Waits until ``text`` appears on current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.793" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.793" endtime="20211027 16:18:54.793"/>
+</kw>
+<msg timestamp="20211027 16:18:54.793" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.792" endtime="20211027 16:18:54.793"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.787" endtime="20211027 16:18:54.793"/>
+</kw>
+<kw name="Search File By name" library="myspace">
+<arg>${files_name}</arg>
+<kw name="Clear Element Text" library="SeleniumLibrary">
+<arg>${SEARCH_FILE_ELE}</arg>
+<doc>Clears the value of text entry element identified by ``locator``.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.795" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.795" endtime="20211027 16:18:54.795"/>
+</kw>
+<msg timestamp="20211027 16:18:54.795" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.794" endtime="20211027 16:18:54.795"/>
+</kw>
+<kw name="Input Into TextBox" library="common">
+<arg>${SEARCH_FILE_ELE}</arg>
+<arg>${file_name}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.796" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.796" endtime="20211027 16:18:54.796"/>
+</kw>
+<msg timestamp="20211027 16:18:54.797" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.796" endtime="20211027 16:18:54.797"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets focus to element identified by ``locator``.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.797" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.797" endtime="20211027 16:18:54.797"/>
+</kw>
+<msg timestamp="20211027 16:18:54.797" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.797" endtime="20211027 16:18:54.797"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<msg timestamp="20211027 16:18:54.798" level="INFO">Typing text '['chromedriver.zip_Wed October 27 161450 UTC 2021_1']' into text field '//input[@placeholder='Search by name']'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.798" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.798" endtime="20211027 16:18:54.798"/>
+</kw>
+<msg timestamp="20211027 16:18:54.798" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.798" endtime="20211027 16:18:54.798"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.795" endtime="20211027 16:18:54.799"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.794" endtime="20211027 16:18:54.799"/>
+</kw>
+<for flavor="IN">
+<var>${file_name}</var>
+<value>@{files_name}</value>
+<iter>
+<var name="${file_name}">chromedriver.zip_Wed October 27 161450 UTC 2021_1</var>
+<kw name="Remove File" library="OperatingSystem">
+<arg>${EXECDIR}/Data/${file_name}</arg>
+<doc>Removes a file with the given path.</doc>
+<msg timestamp="20211027 16:18:54.801" level="INFO" html="true">Removed file '&lt;a href="file:///home/tuanpv/TRAINING AUTOMATION/Automation_TuanPV/robot-framework-twakeconsole/Data/chromedriver.zip_Wed October 27 161450 UTC 2021_1"&gt;/home/tuanpv/TRAINING AUTOMATION/Automation_TuanPV/robot-framework-twakeconsole/Data/chromedriver.zip_Wed October 27 161450 UTC 2021_1&lt;/a&gt;'.</msg>
+<status status="PASS" starttime="20211027 16:18:54.799" endtime="20211027 16:18:54.801"/>
+</kw>
+<kw name="Search File By name" library="myspace">
+<arg>${file_name}</arg>
+<kw name="Clear Element Text" library="SeleniumLibrary">
+<arg>${SEARCH_FILE_ELE}</arg>
+<doc>Clears the value of text entry element identified by ``locator``.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.803" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.802" endtime="20211027 16:18:54.803"/>
+</kw>
+<msg timestamp="20211027 16:18:54.803" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.802" endtime="20211027 16:18:54.803"/>
+</kw>
+<kw name="Input Into TextBox" library="common">
+<arg>${SEARCH_FILE_ELE}</arg>
+<arg>${file_name}</arg>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` is visible.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.805" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.805" endtime="20211027 16:18:54.805"/>
+</kw>
+<msg timestamp="20211027 16:18:54.806" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.804" endtime="20211027 16:18:54.806"/>
+</kw>
+<kw name="Set Focus To Element" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Sets focus to element identified by ``locator``.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.807" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.807" endtime="20211027 16:18:54.807"/>
+</kw>
+<msg timestamp="20211027 16:18:54.807" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.806" endtime="20211027 16:18:54.807"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${locator}</arg>
+<arg>${text}</arg>
+<doc>Types the given ``text`` into text field identified by ``locator``.</doc>
+<msg timestamp="20211027 16:18:54.808" level="INFO">Typing text 'chromedriver.zip_Wed October 27 161450 UTC 2021_1' into text field '//input[@placeholder='Search by name']'.</msg>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.808" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.808" endtime="20211027 16:18:54.808"/>
+</kw>
+<msg timestamp="20211027 16:18:54.809" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.808" endtime="20211027 16:18:54.809"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.804" endtime="20211027 16:18:54.809"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.801" endtime="20211027 16:18:54.809"/>
+</kw>
+<kw name="Verify File Exists" library="myspace">
+<var>${status}</var>
+<arg>${file_name}</arg>
+<kw name="Run Keyword And Ignore Error" library="BuiltIn">
+<var>${status}</var>
+<arg>The Searched File Exists</arg>
+<arg>${file_name}</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<kw name="The Searched File Exists" library="myspace">
+<arg>${file_name}</arg>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//p/span[text()='${file_name}']</arg>
+<arg>${WAIT_TIMEOUT_ELEMENT}</arg>
+<doc>Waits until element ``locator`` appears on current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.811" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.811" endtime="20211027 16:18:54.811"/>
+</kw>
+<msg timestamp="20211027 16:18:54.812" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.811" endtime="20211027 16:18:54.812"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>//p/span[text()='${file_name}']</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<kw name="Capture Page Screenshot" library="SeleniumLibrary">
+<doc>Takes screenshot of the current page and embeds it into log file.</doc>
+<msg timestamp="20211027 16:18:54.812" level="INFO">Cannot capture screenshot because no browser is open.</msg>
+<status status="PASS" starttime="20211027 16:18:54.812" endtime="20211027 16:18:54.812"/>
+</kw>
+<msg timestamp="20211027 16:18:54.813" level="FAIL">No browser is open.</msg>
+<status status="FAIL" starttime="20211027 16:18:54.812" endtime="20211027 16:18:54.813"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:54.810" endtime="20211027 16:18:54.813"/>
+</kw>
+<msg timestamp="20211027 16:18:54.813" level="INFO">${status} = ('FAIL', 'Several failures occurred:\n\n1) No browser is open.\n\n2) No browser is open.')</msg>
+<status status="PASS" starttime="20211027 16:18:54.810" endtime="20211027 16:18:54.813"/>
+</kw>
+<msg timestamp="20211027 16:18:54.813" level="INFO">${status} = ('FAIL', 'Several failures occurred:\n\n1) No browser is open.\n\n2) No browser is open.')</msg>
+<status status="PASS" starttime="20211027 16:18:54.809" endtime="20211027 16:18:54.813"/>
+</kw>
+<if>
+<branch type="IF" condition="${status} == ('PASS', None)">
+<kw name="Delete File" library="myspace">
+<status status="NOT RUN" starttime="20211027 16:18:54.814" endtime="20211027 16:18:54.814"/>
+</kw>
+<status status="NOT RUN" starttime="20211027 16:18:54.813" endtime="20211027 16:18:54.814"/>
+</branch>
+<status status="PASS" starttime="20211027 16:18:54.813" endtime="20211027 16:18:54.814"/>
+</if>
+<status status="FAIL" starttime="20211027 16:18:54.799" endtime="20211027 16:18:54.814"/>
+</iter>
+<status status="FAIL" starttime="20211027 16:18:54.799" endtime="20211027 16:18:54.814"/>
+</for>
+<kw name="Close All Browsers" library="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" starttime="20211027 16:18:54.814" endtime="20211027 16:18:54.814"/>
+</kw>
+<status status="FAIL" starttime="20211027 16:18:53.530" endtime="20211027 16:18:54.814">Several failures occurred:
+
+1) No browser is open.
+
+2) No browser is open.
+
+3) No browser is open.
+
+4) No browser is open.
+
+5) No browser is open.
+
+6) No browser is open.
+
+7) No browser is open.
+
+8) No browser is open.
+
+9) No browser is open.
+
+    [ Message content over the limit has been removed. ]
+
+14) No browser is open.
+
+15) No browser is open.
+
+16) No browser is open.
+
+17) No browser is open.
+
+18) No browser is open.
+
+19) No browser is open.
+
+20) No browser is open.
+
+21) No browser is open.
+
+22) No browser is open.
+
+23) No browser is open.</status>
+</kw>
+<status status="FAIL" starttime="20211027 16:14:48.710" endtime="20211027 16:18:54.814">Teardown failed:
+Several failures occurred:
+
+1) No browser is open.
+
+2) No browser is open.
+
+3) No browser is open.
+
+4) No browser is open.
+
+5) No browser is open.
+
+6) No browser is open.
+
+7) No browser is open.
+
+8) No browser is open.
+
+9) No browser is open.
+
+    [ Message content over the limit has been removed. ]
+
+14) No browser is open.
+
+15) No browser is open.
+
+16) No browser is open.
+
+17) No browser is open.
+
+18) No browser is open.
+
+19) No browser is open.
+
+20) No browser is open.
+
+21) No browser is open.
+
+22) No browser is open.
+
+23) No browser is open.</status>
+</test>
+<status status="FAIL" starttime="20211027 16:14:48.572" endtime="20211027 16:18:54.815"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" skip="0" id="s1" name="Currentupload">Currentupload</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

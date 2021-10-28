@@ -1,0 +1,5 @@
+# staging.args
+-v URL:https://user.linshare-4-3-on-commit.integration-linshare.org/
+-v UserEmail:walker.mccallister@linshare.org
+-v UserPassWord:secret
+-v PC_HOSTNAME:linagora
